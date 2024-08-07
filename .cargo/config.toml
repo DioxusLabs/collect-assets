@@ -1,0 +1,4 @@
+# [build]
+# rustflags = ["--all-features"]
+
+# set the default enabled features for all packages

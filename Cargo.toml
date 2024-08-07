@@ -1,7 +1,35 @@
+[workspace]
+resolver = "2"
+members = [
+    "packages/manganis",
+    "packages/macro",
+    "packages/common",
+    "packages/cli-support",
+    "packages/resolver",
+    "packages/virtual-file",
+
+    "packages/test-package",
+    "packages/test-package/test-package-dependency",
+    "packages/test-package/test-package-nested-dependency",
+]
+
+[workspace.package]
+version = "0.3.0-alpha.0"
+
+[workspace.dependencies]
+manganis  = { path = "packages/manganis", version = "0.3.0-alpha.0" }
+manganis-common  = { path = "packages/common", version = "0.3.0-alpha.0" }
+manganis-cli-support  = { path = "packages/cli-support", version = "0.3.0-alpha.0" }
+manganis-macro  = { path = "packages/macro", version = "0.3.0-alpha.0" }
+manganis-resolver  = { path = "packages/resolver", version = "0.3.0-alpha.0" }
+
+base64 = "0.22.1"
+infer = "0.16.0"
+serde = { version = "1.0" }
+
 [package]
-# Manganese is a rusting catalyst. Manganis makes it faster to collect rust assets (and has almost no google search results)
-name = "manganis"
-version.workspace = true
+name = "manganis-examples"
+publish = false
 authors = ["Evan Almloff"]
 edition = "2021"
 description = "Ergonomic, automatic, cross crate asset collection and optimization"
@@ -10,17 +38,7 @@ repository = "https://github.com/DioxusLabs/manganis/"
 homepage = "https://dioxuslabs.com"
 keywords = ["assets"]
 
-[lib]
-
-[dependencies]
-manganis-macro = { path = "./macro", version = "0.3.0-alpha.0", optional = true }
-
-[workspace]
-package.version = "0.3.0-alpha.0"
-members = ["macro", "common", "cli-support", "test-package", "test-package/test-package-dependency", "test-package/test-package-nested-dependency"]
-
-[features]
-default = ["macro"]
-html = []
-url-encoding = ["manganis-macro/url-encoding"]
-macro = ["dep:manganis-macro"]
+[dev-dependencies]
+manganis = { workspace = true, features = ["macro"] }
+manganis-resolver = { workspace = true }
+linkme = "*"
